@@ -1,4 +1,5 @@
-# lab2_programming_technology
+# Programming_technology_2lab
+
 Межъязыковые форматы хранения и передачи данных.
 Вариант 24.
 
