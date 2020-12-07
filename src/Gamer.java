@@ -1,12 +1,12 @@
 import java.util.List;
 
 public class Gamer {
-    private String Name;
+    private String name;
     private List<Card> hand; //карты в руках 6 штук
     private List<Card> cardDeck; //колода 9 штук
 
     public Gamer(String name, List<Card> hand, List<Card> cardDeck) {
-        Name = name;
+        this.name = name;
         this.hand = hand;
         this.cardDeck = cardDeck;
     }
@@ -35,13 +35,20 @@ public class Gamer {
             }
         }
 
-        //здесь не получилось побить тем, что в руке, поэтому выбираем последнюю карту из запасной колоды
+        //здесь не получилось побить тем, что в руке, или рука оказалась пуста, поэтому выбираем последнюю карту из запасной колоды
         //и бью ей
         Card auxCard = cardDeck.get(cardDeck.size() - 1);
-        if (lastUnbrokenCard.getHitted(auxCard)) {
+        if (lastUnbrokenCard.getHitted(auxCard) || hand.isEmpty()) {
             Card returnCard = auxCard;
             cardDeck.remove(auxCard);
             return returnCard;
+        } else {
+            hand.add(auxCard);
+            cardDeck.remove(auxCard);
+        }
+
+        if (hand.size()==0) {
+            hand.add(cardDeck.get(0));
         }
 
         //Игроку не удалось побить карту
@@ -49,8 +56,7 @@ public class Gamer {
     }
 
     public String getName() {
-        return this.Name;
+        return this.name;
     }
 }
-
 
